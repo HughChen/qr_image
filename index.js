@@ -65,6 +65,17 @@ correctionSlider.oninput = function () {
   }
 };
 
+var borderSlider = document.getElementById("borderSize");
+var borderOutput = document.getElementById("printBorderSize");
+borderOutput.innerHTML = borderSlider.value; // Display the default slider value
+var borderSize = Number(borderSlider.value);
+
+// Update the current slider value (each time you drag the slider handle)
+borderSlider.oninput = function () {
+  borderOutput.innerHTML = this.value;
+  borderSize = Number(this.value);
+};
+
 /**
  * Check whether bit at current position should be full sized.
  *
@@ -75,11 +86,13 @@ correctionSlider.oninput = function () {
  */
 function isSafeBit(i, j, QRLength) {
   // Currently hard coding position bits
-  if (i < 8 && j < 8) {
+  lowerLimit = (8 + borderSize)
+  upperLimit = (QRLength - 8 + borderSize)
+  if (i < lowerLimit && j < lowerLimit) {
     return false;
-  } else if (i > QRLength - 8 && j < 8) {
+  } else if (i > upperLimit && j < lowerLimit) {
     return false;
-  } else if (i < 8 && j > QRLength - 8) {
+  } else if (i < lowerLimit && j > upperLimit) {
     return false;
   }
 
@@ -156,7 +169,7 @@ function makeCode() {
 
   // QR code sizing
   bitLength = 10;
-  canvasLength = bitLength * (QRLength + 2);
+  canvasLength = bitLength * (QRLength + borderSize * 2);
   canvas.width = canvasLength;
   canvas.height = canvasLength;
 
@@ -185,7 +198,14 @@ function makeCode() {
       } else {
         ctx.fillStyle = white;
       }
-      drawShape(ctx, i + 1, j + 1, bitLength, radiusRatio, QRLength);
+      drawShape(
+        ctx,
+        i + borderSize,
+        j + borderSize,
+        bitLength,
+        radiusRatio,
+        QRLength
+      );
     }
   }
 }
