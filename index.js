@@ -21,7 +21,6 @@ function handleImage(e) {
   reader.readAsDataURL(e.target.files[0]);
 }
 
-
 var qrcode = new QRCode("qrcode", {
   width: 256,
   height: 256,
@@ -30,41 +29,40 @@ var qrcode = new QRCode("qrcode", {
   correctLevel: QRCode.CorrectLevel.L,
 });
 
-
 var sizeSlider = document.getElementById("radiusSize");
 var sizeOutput = document.getElementById("printSize");
 sizeOutput.innerHTML = sizeSlider.value; // Display the default slider value
-var radiusRatio = sizeSlider.value/200;
+var radiusRatio = sizeSlider.value / 200;
 
 // Update the current slider value (each time you drag the slider handle)
 sizeSlider.oninput = function () {
   sizeOutput.innerHTML = this.value;
-  radiusRatio = this.value/200;
+  radiusRatio = this.value / 200;
 };
 
 var correctionSlider = document.getElementById("errorCorrection");
 var correctionOutput = document.getElementById("printCorrection");
 correctionOutput.innerHTML = correctionSlider.value; // Display the default slider value
 var correctionLevel = correctionSlider.value;
-if (correctionLevel === '1') {
+if (correctionLevel === "1") {
   qrcode._htOption.correctLevel = QRCode.CorrectLevel.L;
-} else if (correctionLevel === '2') {
+} else if (correctionLevel === "2") {
   qrcode._htOption.correctLevel = QRCode.CorrectLevel.M;
-} else if (correctionLevel === '3') {
+} else if (correctionLevel === "3") {
   qrcode._htOption.correctLevel = QRCode.CorrectLevel.H;
-} 
+}
 
 // Update the current slider value (each time you drag the slider handle)
 correctionSlider.oninput = function () {
   correctionOutput.innerHTML = this.value;
   correctionLevel = correctionSlider.value;
-  if (correctionLevel === '1') {
+  if (correctionLevel === "1") {
     qrcode._htOption.correctLevel = QRCode.CorrectLevel.L;
-  } else if (correctionLevel === '2') {
+  } else if (correctionLevel === "2") {
     qrcode._htOption.correctLevel = QRCode.CorrectLevel.M;
-  } else if (correctionLevel === '3') {
+  } else if (correctionLevel === "3") {
     qrcode._htOption.correctLevel = QRCode.CorrectLevel.H;
-  } 
+  }
 };
 
 /**
@@ -79,9 +77,9 @@ function isSafeBit(i, j, QRLength) {
   // Currently hard coding position bits
   if (i < 8 && j < 8) {
     return false;
-  } else if (i > QRLength - 9 && j < 8) {
+  } else if (i > QRLength - 8 && j < 8) {
     return false;
-  } else if (i < 8 && j > QRLength - 9) {
+  } else if (i < 8 && j > QRLength - 8) {
     return false;
   }
 
@@ -118,9 +116,12 @@ function download() {
     alert("Error: no QR code to download");
     return;
   }
-  var link = document.getElementById('link');
-  link.setAttribute('download', 'qr_image.png');
-  link.setAttribute('href', canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"));
+  var link = document.getElementById("link");
+  link.setAttribute("download", "qr_image.png");
+  link.setAttribute(
+    "href",
+    canvas.toDataURL("image/png").replace("image/png", "image/octet-stream")
+  );
   link.click();
 }
 
@@ -155,7 +156,7 @@ function makeCode() {
 
   // QR code sizing
   bitLength = 10;
-  canvasLength = bitLength * QRLength;
+  canvasLength = bitLength * (QRLength + 2);
   canvas.width = canvasLength;
   canvas.height = canvasLength;
 
@@ -163,7 +164,13 @@ function makeCode() {
   ctx.fillStyle = "#FFFFFF";
   ctx.fillRect(0, 0, canvasLength, canvasLength);
   if (img) {
-    ctx.drawImage(img, 0, 0, canvasLength, canvasLength);
+    ctx.drawImage(
+      img,
+      bitLength,
+      bitLength,
+      bitLength * QRLength,
+      bitLength * QRLength
+    );
   }
 
   // Colors of true and false bits
@@ -178,7 +185,7 @@ function makeCode() {
       } else {
         ctx.fillStyle = white;
       }
-      drawShape(ctx, i, j, bitLength, radiusRatio, QRLength);
+      drawShape(ctx, i + 1, j + 1, bitLength, radiusRatio, QRLength);
     }
   }
 }
