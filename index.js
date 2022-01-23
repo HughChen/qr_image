@@ -68,12 +68,12 @@ correctionSlider.oninput = function () {
 var borderSlider = document.getElementById("borderSize");
 var borderOutput = document.getElementById("printBorderSize");
 borderOutput.innerHTML = borderSlider.value; // Display the default slider value
-var borderSize = Number(borderSlider.value);
+var borderSizeValue = Number(borderSlider.value);
 
 // Update the current slider value (each time you drag the slider handle)
 borderSlider.oninput = function () {
   borderOutput.innerHTML = this.value;
-  borderSize = Number(this.value);
+  borderSizeValue = Number(this.value);
 };
 
 /**
@@ -86,8 +86,8 @@ borderSlider.oninput = function () {
  */
 function isSafeBit(i, j, QRLength) {
   // Currently hard coding position bits
-  lowerLimit = (8 + borderSize)
-  upperLimit = (QRLength - 8 + borderSize)
+  lowerLimit = (8 + borderSizeValue)
+  upperLimit = (QRLength - 8 + borderSizeValue)
   if (i < lowerLimit && j < lowerLimit) {
     return false;
   } else if (i > upperLimit && j < lowerLimit) {
@@ -169,7 +169,7 @@ function makeCode() {
 
   // QR code sizing
   bitLength = 10;
-  canvasLength = bitLength * (QRLength + borderSize * 2);
+  canvasLength = bitLength * (QRLength + borderSizeValue * 2);
   canvas.width = canvasLength;
   canvas.height = canvasLength;
 
@@ -200,8 +200,8 @@ function makeCode() {
       }
       drawShape(
         ctx,
-        i + borderSize,
-        j + borderSize,
+        i + borderSizeValue,
+        j + borderSizeValue,
         bitLength,
         radiusRatio,
         QRLength
