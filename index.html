@@ -2,26 +2,113 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="index.css" />
+		<link
+			rel="stylesheet"
+			href="https://www.w3schools.com/w3css/4/w3.css"
+		/>
 	</head>
 
 	<body>
-		<input
-			id="text"
-			type="text"
-			value=""
-			style="width: 80%"
-		/>
+		<div style="width: 50%; margin: 0 auto">
+			<br />
 
-		<br><br>
+			<label>Image File (optional):</label>
+			<input type="file" id="imageLoader" name="imageLoader" />
+			<p>
+				Works better for square images (use an
+				<a href="https://www.online-image-editor.com/">editor</a> as
+				needed).
+			</p>
+			<br />
 
-		<button type="button" onclick="makeCode()">Generate code</button>
+			<canvas id="imageCanvas"></canvas>
 
-		<br><br>
+			<br />
 
-		<canvas id="myCanvas" width="300" height="300"></canvas>
-		<div id="qrcode" style="display:none;"></div>
+			<label>URL*:</label>
+			<input class="w3-input" id="text" type="text" />
+
+			<br />
+
+			<!-- <p>Bit size: <span id="printSize"></span></p> -->
+
+			<div class="tooltip">
+				Bit size:
+				<span class="tooltiptext"
+					>Larger sizes hide more of the image, but are easier to
+					scan. I found that a size of 30 works well.</span
+				>
+				<span id="printSize"></span>
+			</div>
+
+			<br /><br />
+
+			<div class="slidecontainer">
+				<input
+					type="range"
+					min="10"
+					max="100"
+					value="30"
+					class="slider"
+					id="radiusSize"
+				/>
+			</div>
+
+			<br />
+
+			<div class="tooltip">
+				Error Correction:
+				<span class="tooltiptext"
+					>Higher level of error correction makes bigger qr codes, but
+					also allows you to hide more of the QR code. The former is
+					more relevant to this app.</span
+				>
+				<span id="printCorrection"></span>
+			</div>
+
+			<br /><br />
+
+			<div class="slidecontainer">
+				<input
+					type="range"
+					min="1"
+					max="3"
+					value="3"
+					class="slider"
+					id="errorCorrection"
+				/>
+			</div>
+
+			<br />
+
+			<button
+				class="w3-button w3-white w3-border w3-border-blue"
+				style="margin: 0 auto"
+				onclick="makeCode()"
+			>
+				Generate QR code
+			</button>
+
+			<br /><br />
+
+			<canvas id="myCanvas"></canvas>
+
+			<br /><br />
+
+			<button
+				class="w3-button w3-white w3-border w3-border-blue"
+				style="margin: 0 auto"
+				onclick="download()"
+			>
+				Download PNG
+			</button>
+
+			<br /><br />
+		</div>
+
+		<a id="link"></a>
+		<div id="qrcode" style="display: none"></div>
 		<script src="qrcode.js"></script>
 		<script src="index.js"></script>
 	</body>
 </html>
-
