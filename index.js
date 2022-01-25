@@ -180,11 +180,11 @@ function makeCode() {
     return;
   }
 
-  // Pad URL since we want more density
-  maxLength = 40;
-  if (url.length < maxLength) {
-    url += "?/" + "0".repeat(maxLength - url.length);
-  }
+  // // Pad URL since we want more density
+  // maxLength = 40;
+  // if (url.length < maxLength) {
+  //   url += "?/" + "0".repeat(maxLength - url.length);
+  // }
 
   // Generate URL bits
   qrcode.makeCode(url);
