@@ -86,8 +86,8 @@ borderSlider.oninput = function () {
  */
 function isSafeBit(i, j, QRLength) {
   // Currently hard coding position bits
-  lowerLimit = (8 + borderSizeValue)
-  upperLimit = (QRLength - 8 + borderSizeValue)
+  lowerLimit = 7 + borderSizeValue;
+  upperLimit = QRLength - 8 + borderSizeValue;
   if (i < lowerLimit && j < lowerLimit) {
     return false;
   } else if (i > upperLimit && j < lowerLimit) {
@@ -179,8 +179,8 @@ function makeCode() {
   if (img) {
     ctx.drawImage(
       img,
-      bitLength,
-      bitLength,
+      bitLength * borderSizeValue,
+      bitLength * borderSizeValue,
       bitLength * QRLength,
       bitLength * QRLength
     );
