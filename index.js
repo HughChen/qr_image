@@ -1,11 +1,13 @@
-// Upload image to canvas
+/**
+ * Section: Uploading Images
+ */
+
 var imageLoader = document.getElementById("imageLoader");
 imageLoader.addEventListener("change", handleImage, false);
 var uploadCanvas = document.getElementById("imageCanvas");
 var uploadContext = uploadCanvas.getContext("2d");
 
 img = false;
-var canvas = false;
 
 function handleImage(e) {
   var reader = new FileReader();
@@ -21,6 +23,12 @@ function handleImage(e) {
   reader.readAsDataURL(e.target.files[0]);
 }
 
+/**
+ * Section: Initialize qrcode and canvas
+ */
+
+var canvas = false;
+
 var qrcode = new QRCode("qrcode", {
   width: 256,
   height: 256,
@@ -29,20 +37,30 @@ var qrcode = new QRCode("qrcode", {
   correctLevel: QRCode.CorrectLevel.L,
 });
 
+/**
+ * Section: Code to handle inputs (e.g., sliders)
+ */
+
+// Size of QR Code squares
 var sizeSlider = document.getElementById("radiusSize");
 var sizeOutput = document.getElementById("printSize");
-sizeOutput.innerHTML = sizeSlider.value; // Display the default slider value
+
+// Display the default slider value and grab it
+sizeOutput.innerHTML = sizeSlider.value;
 var radiusRatio = sizeSlider.value / 200;
 
-// Update the current slider value (each time you drag the slider handle)
+// Update the current slider value
 sizeSlider.oninput = function () {
   sizeOutput.innerHTML = this.value;
   radiusRatio = this.value / 200;
 };
 
+// Level of error correction (low, medium, high) (excluding quartile)
 var correctionSlider = document.getElementById("errorCorrection");
 var correctionOutput = document.getElementById("printCorrection");
-correctionOutput.innerHTML = correctionSlider.value; // Display the default slider value
+
+// Display the default slider value and grab it
+correctionOutput.innerHTML = correctionSlider.value;
 var correctionLevel = correctionSlider.value;
 if (correctionLevel === "1") {
   qrcode._htOption.correctLevel = QRCode.CorrectLevel.L;
@@ -52,7 +70,7 @@ if (correctionLevel === "1") {
   qrcode._htOption.correctLevel = QRCode.CorrectLevel.H;
 }
 
-// Update the current slider value (each time you drag the slider handle)
+// Update the current slider value
 correctionSlider.oninput = function () {
   correctionOutput.innerHTML = this.value;
   correctionLevel = correctionSlider.value;
@@ -65,6 +83,7 @@ correctionSlider.oninput = function () {
   }
 };
 
+// Size of white border (quiet zone)
 var borderSlider = document.getElementById("borderSize");
 var borderOutput = document.getElementById("printBorderSize");
 borderOutput.innerHTML = borderSlider.value; // Display the default slider value
@@ -77,7 +96,12 @@ borderSlider.oninput = function () {
 };
 
 /**
+ * Section: Helper functions for visualizing QR code
+ */
+
+/**
  * Check whether bit at current position should be full sized.
+ * In particular, make the position bits (corners) full sized.
  *
  * @param {i} The current bit's row.
  * @param {j} The current bit's column.
@@ -123,6 +147,9 @@ function drawShape(ctx, i, j, bitLength, radiusRatio, QRLength) {
   ctx.fillRect(xCenter - radius, yCenter - radius, 2 * radius, 2 * radius);
 }
 
+/**
+ * Download the QR code as a PNG
+ */
 function download() {
   // Download image
   if (!canvas) {
@@ -138,6 +165,9 @@ function download() {
   link.click();
 }
 
+/**
+ * Make the QR code
+ */
 function makeCode() {
   // Grab url input
   elementText = document.getElementById("text");
@@ -174,8 +204,12 @@ function makeCode() {
   canvas.height = canvasLength;
 
   // Set background of canvas
-  ctx.fillStyle = "#FFFFFF";
-  ctx.fillRect(0, 0, canvasLength, canvasLength);
+  if (document.getElementById("whitebackground").checked) {
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillRect(0, 0, canvasLength, canvasLength);
+  }
+
+  // Set image of code
   if (img) {
     ctx.drawImage(
       img,
