@@ -7,6 +7,9 @@ imageLoader.addEventListener("change", handleImage, false);
 var uploadCanvas = document.getElementById("imageCanvas");
 var uploadContext = uploadCanvas.getContext("2d");
 
+uploadCanvas.width = 200;
+uploadCanvas.height = 200;
+
 img = false;
 
 function handleImage(e) {
@@ -14,9 +17,7 @@ function handleImage(e) {
   reader.onload = function (event) {
     img = new Image();
     img.onload = function () {
-      uploadCanvas.width = img.width;
-      uploadCanvas.height = img.height;
-      uploadContext.drawImage(img, 0, 0);
+      uploadContext.drawImage(img, 0, 0, 200, 200);
     };
     img.src = event.target.result;
   };

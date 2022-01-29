@@ -13,30 +13,33 @@
 		<link rel="icon" href="./demo.png" />
 	</head>
 
-	<title>qr_image</title>
+	<title>QRImage</title>
 	<body>
 		<div style="width: 50%; margin: 0 auto">
-			<h1>QR codes with images</h1>
+			<div class="center">
+				<h1>QRImage</h1>
+			</div>
 
-			<h2>
-				A website to generate valid QR codes with images in the
-				background.
-			</h2>
+			<div class="center">
+				<h3>QRImage is a web app to generate QR codes with images.</h3>
+			</div>
 
-			<a
-				href="https://www.youtube.com/watch?v=hA4TKV2Lbx8"
-				target="_blank"
-				><i
-					class="fa fa-youtube-play"
-					style="font-size: 36px; color: red"
-				></i
-			></a>
+			<div class="center">
+				<a
+					href="https://www.youtube.com/watch?v=hA4TKV2Lbx8"
+					target="_blank"
+					><i
+						class="fa fa-youtube-play"
+						style="font-size: 36px; color: red"
+					></i
+				></a>
 
-			<a href="https://github.com/hughchen/qr_image" target="_blank"
-				><i class="fa fa-github" style="font-size: 36px"></i
-			></a>
+				<a href="https://github.com/hughchen/qr_image" target="_blank"
+					><i class="fa fa-github" style="font-size: 36px"></i
+				></a>
+			</div>
 
-			<br /><br />
+			<br />
 
 			<label>Image File (optional):</label>
 			<input type="file" id="imageLoader" name="imageLoader" />
@@ -45,11 +48,10 @@
 				<a href="https://www.online-image-editor.com/">editor</a> as
 				needed).
 			</p>
-			<br />
 
-			<canvas id="imageCanvas"></canvas>
-
-			<br />
+			<div class="center">
+				<canvas id="imageCanvas"></canvas>
+			</div>
 
 			<label>URL*:</label>
 			<input class="w3-input" id="text" type="text" />
@@ -141,29 +143,35 @@
 
 			<br />
 
-			<button
-				class="w3-button w3-white w3-border w3-border-blue"
-				style="margin: 0 auto"
-				onclick="makeCode()"
-			>
-				Generate QR code
-			</button>
+			<div class="center">
+				<button
+					class="w3-button w3-white w3-border w3-border-blue"
+					style="margin: 0 auto"
+					onclick="makeCode()"
+				>
+					Generate QR code
+				</button>
+			</div>
 
-			<br /><br />
+			<br />
 
-			<canvas id="myCanvas"></canvas>
+			<div class="center">
+				<canvas id="myCanvas"></canvas>
+			</div>
 
-			<br /><br />
+			<br />
 
-			<button
-				class="w3-button w3-white w3-border w3-border-blue"
-				style="margin: 0 auto"
-				onclick="download()"
-			>
-				Download PNG
-			</button>
+			<div class="center">
+				<button
+					class="w3-button w3-white w3-border w3-border-blue"
+					style="margin: 0 auto"
+					onclick="download()"
+				>
+					Download PNG
+				</button>
+			</div>
 
-			<br /><br />
+			<br />
 		</div>
 
 		<a id="link"></a>
