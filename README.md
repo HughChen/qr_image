@@ -1,11 +1,11 @@
 # QRImage
 
 <p align="center">
-    <img src="images/demo.png">
+    QRImage is a web app to generate QR codes with images.
 </p>
 
 <p align="center">
-    QRImage is a web app to generate QR codes with images.
+    <img src="images/demo.png">
 </p>
 
 ### Usage
