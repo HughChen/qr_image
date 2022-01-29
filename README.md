@@ -1,5 +1,9 @@
 # qr_image
 
+<p align="center">
+    <img src="images/demo.png">
+</p>
+
 A website to generate valid QR codes with images in the background.
 
 ### Usage
