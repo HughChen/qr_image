@@ -1,10 +1,12 @@
-# qr_image
+# QRImage
 
 <p align="center">
     <img src="images/demo.png">
 </p>
 
-A website to generate valid QR codes with images in the background.
+<p align="center">
+    QRImage is a web app to generate QR codes with images.
+</p>
 
 ### Usage
 
