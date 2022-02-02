@@ -19,3 +19,7 @@
 ## Dependency
 
 * [davidshimjs / qrcode](https://github.com/davidshimjs/qrcodejs)
+
+## License
+
+[GPLv3](LICENSE)
