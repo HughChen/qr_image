@@ -235,8 +235,8 @@ function makeCode() {
       }
       drawShape(
         ctx,
-        i + borderSizeValue,
         j + borderSizeValue,
+        i + borderSizeValue,
         bitLength,
         radiusRatio,
         QRLength
