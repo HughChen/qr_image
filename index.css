@@ -75,6 +75,7 @@ canvas {
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
+  padding: 10px;
 }
 
 .center {

@@ -153,21 +153,44 @@ function drawShape(ctx, i, j, bitLength, radiusRatio, QRLength) {
 }
 
 /**
- * Download the QR code as a PNG
+ * Download the QR code as a PNG or JPEG
  */
-function download() {
+function download(format) {
   // Download image
   if (!canvas) {
     alert("Error: no QR code to download");
     return;
   }
   var link = document.getElementById("link");
-  link.setAttribute("download", "qr_image.png");
-  link.setAttribute(
-    "href",
-    canvas.toDataURL("image/png").replace("image/png", "image/octet-stream")
-  );
+
+  if(format == 'png'){
+    link.setAttribute("download", "qr_image.png");
+    link.setAttribute(
+      "href",
+      canvas.toDataURL("image/png").replace("image/png", "image/octet-stream")
+    );
+  }
+  if(format == 'jpeg'){
+    link.setAttribute("download", "qr_image.jpeg");
+    link.setAttribute(
+      "href",
+      canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream")
+    );
+  }
   link.click();
+}
+
+/**
+ * Validate URL inputted by user
+ */
+function isValidUrl(str) {
+  try {
+    new URL(str);
+    return true;
+  }
+  catch (err) {
+    return false;
+  }
 }
 
 /**
@@ -180,7 +203,14 @@ function makeCode() {
 
   // Check for non-empty url
   if (!url) {
-    alert("Error: empty input");
+    alert("Error: please input a URL");
+    elementText.focus();
+    return;
+  }
+
+  // Check for valid URL input
+  if (!isValidUrl(url)) {
+    alert("Error: please input a valid URL");
     elementText.focus();
     return;
   }
@@ -211,6 +241,16 @@ function makeCode() {
   // Set background of canvas
   if (document.getElementById("whitebackground").checked) {
     ctx.fillStyle = "#FFFFFF";
+    ctx.fillRect(0, 0, canvasLength, canvasLength);
+    document.getElementById("colorpicker").value = '#FFFFFF';
+  }
+  else if (document.getElementById("blackbackground").checked){
+    ctx.fillStyle = "#000000";
+    ctx.fillRect(0, 0, canvasLength, canvasLength);
+    document.getElementById("colorpicker").value = '#000000';
+  }
+  else if (document.getElementById("custombackground").checked){
+    ctx.fillStyle = document.getElementById("colorpicker").value;
     ctx.fillRect(0, 0, canvasLength, canvasLength);
   }
 
