@@ -61,13 +61,13 @@
 			<!-- <p>Bit size: <span id="printSize"></span></p> -->
 
 			<div class="tooltip">
-				Bit size:
+				Bit Size:
 				<span class="tooltiptext"
-					>Larger sizes hide more of the image, but are easier to
+					>Larger sizes hide more of the image but are easier to
 					scan. I found that a size of 30 works well.</span
 				>
-				<span id="printSize"></span>
 			</div>
+			<span id="printSize"></span>
 
 			<br /><br />
 
@@ -87,12 +87,12 @@
 			<div class="tooltip">
 				Error Correction:
 				<span class="tooltiptext"
-					>Higher level of error correction makes bigger qr codes, but
+					>Higher level of error correction makes bigger QR codes, but
 					also allows you to hide more of the QR code. The former is
 					more relevant to this app.</span
 				>
-				<span id="printCorrection"></span>
 			</div>
+			<span id="printCorrection"></span>
 
 			<br /><br />
 
@@ -116,8 +116,8 @@
 					border around the code, but depending on your use case you
 					can get rid of it.</span
 				>
-				<span id="printBorderSize"></span>
 			</div>
+			<span id="printBorderSize"></span>
 
 			<br /><br />
 
@@ -134,14 +134,29 @@
 
 			<br />
 
+			<p>Select Background (default is transparent):</p>
+			
 			<input
 				type="checkbox"
 				id="whitebackground"
 				name="whitebackground"
 			/>
 			<label for="whitebackground">White background</label><br />
+			<input
+				type="checkbox"
+				id="blackbackground"
+				name="blackbackground"
+			/>
+			<label for="blackbackground">Black background</label><br /><br />
+			<input
+				type="checkbox"
+				id="custombackground"
+				name="custombackground"
+			/>
+			<label for="custombackground"> Custom background color picker:</label>
+			<input type="color" id="colorpicker" value="#fff000">
 
-			<br />
+			<br /><br />
 
 			<div class="center">
 				<button
@@ -165,9 +180,16 @@
 				<button
 					class="w3-button w3-white w3-border w3-border-blue"
 					style="margin: 0 auto"
-					onclick="download()"
+					onclick="download('png')"
 				>
 					Download PNG
+				</button>
+				<button
+					class="w3-button w3-white w3-border w3-border-blue"
+					style="margin: 0 auto"
+					onclick="download('jpeg')"
+				>
+					Download JPEG
 				</button>
 			</div>
 
